@@ -8,3 +8,10 @@ class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
     rating = models.IntegerField(default=5)
+    
+    class Meta:
+        verbose_name = "Review"
+        verbose_name_plural = "Reviews"
+        
+    def __str__(self):
+        return f"{self.product} {self.text} ({self.rating})"

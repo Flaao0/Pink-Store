@@ -6,7 +6,11 @@ class Category(models.Model):
     slug = models.SlugField(unique=True)
 
     class Meta:
+        verbose_name = "Category"
         verbose_name_plural = "Categories"
+        
+    def __str__(self):
+        return self.name
 
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
@@ -15,3 +19,10 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.PositiveIntegerField(default=0)
     is_awaiable = models.BooleanField(default=True)
+    
+    class Meta:
+        verbose_name = "Product"
+        verbose_name_plural = "Products"
+        
+    def __str__(self):
+        return f"{self.title} ({self.price} руб.)"
