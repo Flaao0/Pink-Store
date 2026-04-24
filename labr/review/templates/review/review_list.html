@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Все отзывы</h2>
+<div class="products-grid">
+  {% for item in reviews %}
+  <div class="product-card">
+    <small style="color: #888">Товар: {{ item.product.title }}</small> [cite:
+    1189, 1194]
+    <h3>Оценка: {{ item.rating }}/5</h3>
+    [cite: 1192, 1198]
+    <p>{{ item.text }}</p>
+    [cite: 1191, 1196]
+
+    <hr style="border: 0; border-top: 1px solid #ffb6c1; margin: 10px 0" />
+    <small>Автор: {{ item.user.username }}</small> [cite: 1190, 1195]
+  </div>
+  {% empty %}
+  <p>Отзывов еще никто не оставлял.</p>
+  {% endfor %}
+</div>
+{% endblock %}

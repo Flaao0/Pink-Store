@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Мои заказы</h2>
+<div class="products-grid">
+  {% for item in orders %}
+  <div class="product-card">
+    <h3>Заказ №{{ item.id }}</h3>
+    [cite: 1077]
+    <p style="color: #888">Дата: {{ item.created_at|date:"d.m.Y H:i" }}</p>
+    [cite: 1142, 1153] {% if item.is_paid %} [cite: 1143, 1156]
+    <p class="stock-yes">Оплачен</p>
+    {% else %}
+    <p class="stock-no">Ожидает оплаты</p>
+    {% endif %}
+  </div>
+  {% empty %}
+  <p>Заказов пока нет.</p>
+  {% endfor %}
+</div>
+{% endblock %}

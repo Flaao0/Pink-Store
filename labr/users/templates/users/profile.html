@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Личный кабинет</h2>
+<div class="product-card">
+  <h3>Привет, {{ user.username }}!</h3>
+  <p><strong>Email:</strong> {{ user.email }}</p>
+  <p><strong>Телефон:</strong> {{ user.profile.phone }}</p>
+  <p><strong>Адрес:</strong> {{ user.profile.address }}</p>
+</div>
+{% endblock %}
