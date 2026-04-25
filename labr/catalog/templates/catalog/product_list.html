@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 <h2>Наш ассортимент</h2>
 <div class="category-filters" style="margin-bottom: 20px">
   <strong>Категории:</strong>
@@ -29,8 +29,15 @@
         {{ item.title }}
       </a>
     </h3>
+    {% if item.image_path %}
+    <div style="margin: 10px 0;">
+      <img src="{% static item.image_path %}"
+      alt="{{ item.title }}"
+      style="max-width: 100%; max-height: 180px; border-radius: 8px;">
+    </div>
+    {% endif %}
     <p class="price">{{ item.price }} ₽</p>
-    {% if item.is_available %}
+    {% if item.is_awaiable %}
     <p class="stock-yes">В наличии</p>
     {% else %}
     <p class="stock-no">Нет в наличии</p>

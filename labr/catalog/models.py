@@ -16,6 +16,12 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
     title = models.CharField(max_length=255)
     description = models.TextField()
+    image_path = models.CharField(
+        'Путь к картинке',
+        max_length=255,
+        blank=True,
+        help_text='Например: "img/products/pink_bag.jpg"',
+    )
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.PositiveIntegerField(default=0)
     is_awaiable = models.BooleanField(default=True)
