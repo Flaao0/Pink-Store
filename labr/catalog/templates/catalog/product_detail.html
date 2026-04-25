@@ -1,36 +1,70 @@
-​​{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %}
 <h2>{{ product.title }}</h2>
 <p>{{ product.description }}</p>
 <p style="color: #ff1493; font-weight: bold; font-size: 20px">
   Цена: {{ product.price }} ₽
 </p>
+
+<hr style="border: 1px solid #eee; margin: 20px 0" />
+
+{% if request.user.is_authenticated %}
+<h3>Оставить отзыв 💖</h3>
 <form method="post">
-  {% csrf_token %}
-  <h3>Оставить отзыв 💖</h3>
-  {{ form.as_p }}
-  <button type="submit">Отправить отзыв</button>
+  {% csrf_token %} {{ form.as_p }}
+  <button
+    type="submit"
+    style="
+      background: #ffb6c1;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    "
+  >
+    Отправить отзыв
+  </button>
 </form>
 
+{% else %}
+<div
+  style="background: #fff0f5; padding: 15px; border-radius: 8px; margin: 20px 0"
+>
+  <p>Только зарегистрированные пользователи могут оставлять отзывы.</p>
+  <p>
+    <a
+      href="{% url 'login' %}"
+      style="color: #ff1493; font-weight: bold; text-decoration: none"
+      >Войти</a
+    >
+    или
+    <a
+      href="{% url 'register' %}"
+      style="color: #ff1493; font-weight: bold; text-decoration: none"
+      >Зарегистрироваться</a
+    >
+  </p>
+</div>
+{% endif %}
+
+<hr style="border: 1px solid #eee; margin: 30px 0 20px" />
+
 <h3>Отзывы:</h3>
-<ul>
-  {% for review in reviews %}
-  <li>{{ review.text }}</li>
-  {% endfor %}
-</ul>
-<hr />
-<h3>Отзывы:</h3>
+
 {% for review in reviews %}
 <div
   style="
     border-left: 3px solid #ffb6c1;
     padding-left: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   "
 >
-  <p>
-    <strong>{{ review.user.username }}</strong> (Оценка: {{ review.rating }}/5)
+  <p style="margin-bottom: 5px">
+    <strong>{{ review.user.username }}</strong>
+    <span style="color: #888; font-size: 14px"
+      >(Оценка: {{ review.rating }}/5)</span
+    >
   </p>
-  <p>{{ review.text }}</p>
+  <p style="margin-top: 0">{{ review.text }}</p>
 </div>
 {% empty %}
 <p style="color: #888">Отзывов пока нет. Будьте первыми!</p>

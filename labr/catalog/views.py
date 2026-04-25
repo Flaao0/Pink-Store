@@ -34,7 +34,7 @@ def product_detail(request, product_id):
             
             # Привязываем товар и временного автора (костыль до внедрения Auth)
             new_review.product = product
-            new_review.user = User.objects.first()
+            new_review.user = request.user
             
             # Сохраняем в базу данных
             new_review.save()
@@ -44,6 +44,7 @@ def product_detail(request, product_id):
     else:
         # Если GET-запрос — создаем пустую форму
         form = ReviewForm()
+        
 
     context = {
         'product': product,
