@@ -1,5 +1,5 @@
 from django.urls import path, reverse_lazy
-from . import views
+from . import views, api_views
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LoginView, LogoutView
 from .views import register
@@ -44,5 +44,6 @@ urlpatterns = [
         ),
         name='password_reset_complete',
     ),
+    path('api/me/', api_views.MyProfileAPIView.as_view(), name='api_my_profile')
 ]
 

@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'catalog.apps.CatalogConfig',
     'users.apps.UsersConfig',
     'orders.apps.OrdersConfig',
@@ -138,9 +139,24 @@ SESSION_ENGINE = "django.contrib.sessions.backends.db"
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.mail.ru')
 EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 465))
-EMAIL_HOST_USER = os.environ.get('flaao0_work@mail.ru')
-EMAIL_HOST_PASSWORD = os.environ.get('jjWUTCyk6IRlT2gE26j9')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL', 'True') == 'True'
 EMAIL_USE_TLS = False
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
+
+INSTALLED_APPS += [
+    'drf_spectacular'
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'PinkStore API',
+    'DESCRIPTION': 'Документация к API',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
